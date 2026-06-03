@@ -1,0 +1,30 @@
+{
+  "name": "dreamina",
+  "version": "0.1.0",
+  "description": "通过本地 dreamina CLI 在 Codex 中使用即梦的图片、视频、任务、积分和登录会话能力。",
+  "author": {
+    "name": "Dreamina CLI GUI"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dreamina",
+    "shortDescription": "通过本地 Dreamina CLI 生成图片和视频。",
+    "longDescription": "Dreamina 将本地 dreamina CLI 封装为 Codex 插件，支持文生图、图生图、图片高清放大、文生视频、图生视频、多帧视频、全能参考视频、异步结果查询、任务历史、账号积分查询、登录、无头登录检查、重新登录、退出登录、版本检查和能力发现。默认使用中文与用户沟通。",
+    "developerName": "Dreamina CLI GUI",
+    "category": "Productivity",
+    "capabilities": [
+      "图片生成",
+      "视频生成",
+      "任务查询",
+      "会话管理"
+    ],
+    "defaultPrompt": [
+      "查询我的 Dreamina 积分。",
+      "用 Dreamina 生成一张图片。",
+      "把参考图片生成视频。"
+    ],
+    "brandColor": "#14B8A6",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

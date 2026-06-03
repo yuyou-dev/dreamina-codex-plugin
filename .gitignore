@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Local runtime output
+.env
+.env.*
+!.env.example
+logs/
+.runtime/
+generated/
+outputs/
+*.log
+
+# Codex local cache
+.codex-cache/
