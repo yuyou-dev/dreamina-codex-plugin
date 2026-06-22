@@ -1,6 +1,6 @@
 {
   "name": "dreamina",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "通过本地 dreamina CLI 在 Codex 中使用即梦的图片、视频、任务、积分和登录会话能力。",
   "author": {
     "name": "Dreamina CLI GUI"

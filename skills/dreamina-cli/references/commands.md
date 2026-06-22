@@ -47,18 +47,18 @@ python3 scripts/list_capabilities.py --format markdown
 - `text2video.py`
   - Required: `--prompt`
   - Optional: `--duration`, `--ratio`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants currently use `720p`.
+  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
 - `image2video.py`
   - Required: `--image`, `--prompt`
   - Optional: `--duration`, `--video-resolution`, `--model-version`, `--session`, `--poll`
   - Notes:
     - model aliases `3.0_fast`, `3.0_pro`, `3.5_pro` are normalized to CLI canonical values
     - advanced controls require `--model-version`
-    - only `seedance2.0_vip` currently supports `1080p`; other models use `720p`
+    - only `seedance2.0_vip` currently supports `1080p`; other models, including `seedance2.0mini`, use `720p`
 - `frames2video.py`
   - Required: `--first`, `--last`, `--prompt`
   - Optional: `--duration`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - only `seedance2.0_vip` currently supports `1080p`; other models use `720p`
+  - only `seedance2.0_vip` currently supports `1080p`; other models, including `seedance2.0mini`, use `720p`
 - `multiframe2video.py`
   - Required: `--images`
   - Input count: `2-20`
@@ -75,7 +75,7 @@ python3 scripts/list_capabilities.py --format markdown
   - Dreamina's flagship "全能参考" mode, formerly `ref2video`
   - Required: at least one `--image` or `--video`
   - Optional: repeated `--image`, repeated `--video`, repeated `--audio`, `--prompt`, `--duration`, `--ratio`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants currently use `720p`.
+  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
 
 ### Query, list, and account
 
@@ -123,6 +123,18 @@ Dreamina also exposes `dreamina session` directly. These commands are currently 
 - `dreamina session delete <session_id>`
   - Delete a session. Session `0` cannot be deleted; history is moved back to the default session.
   - Alias: `dreamina session rm <session_id>`.
+
+
+## 3.1 Current model choices from `dreamina -h` on 2026-06-22
+
+- `text2image.py`: `3.0`, `3.1`, `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`
+- `image2image.py`: `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`
+- `text2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
+- `image2video.py`: `3.0`, `3.0fast`, `3.0pro`, `3.0_fast`, `3.0_pro`, `3.5pro`, `3.5_pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
+- `frames2video.py`: `3.0`, `3.5pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
+- `multimodal2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
+
+`seedance2.0_vip` supports `720p` and `1080p`. Other Seedance 2.0 family models, including `seedance2.0mini`, currently support `720p` only.
 
 ## 4. Argument naming
 

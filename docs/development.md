@@ -31,8 +31,15 @@ dreamina query_result -h
 dreamina list_task -h
 dreamina user_credit -h
 dreamina login -h
+dreamina login checklogin -h
 dreamina relogin -h
 dreamina logout -h
+dreamina session -h
+dreamina session create -h
+dreamina session list -h
+dreamina session search -h
+dreamina session rename -h
+dreamina session delete -h
 ```
 
 3. 同步封装脚本和文档：
