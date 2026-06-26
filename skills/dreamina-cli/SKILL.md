@@ -29,6 +29,7 @@ Use it for:
 - submitting video generation tasks
 - querying async task results
 - reviewing saved task history
+- managing creative sessions with `dreamina session create/list/search/rename/delete` and targeting generation commands with `--session`
 
 ## Default workflow
 
@@ -47,12 +48,13 @@ At a high level:
 - Use `user_credit` to check budget.
 - Use `query_result` when you already have a `submit_id`.
 - Use `list_task` to review recent saved tasks.
+- Use raw `dreamina session` commands when the user wants to create, list, search, rename, or delete creative sessions.
 - Use `checklogin` after `login --headless` or `relogin --headless` returns a `device_code`.
 - Use image commands when the input or output is image-first.
 - Use video commands when the output is a video.
 - Use `image2video` when one main image is enough; if the user has multiple images for a coherent story, prefer `multiframe2video`.
 - Use `multiframe2video` for Dreamina's intelligent multi-frame flow: multiple images in, one coherent story video out.
-- Use `multimodal2video` for Dreamina's flagship "全能参考" mode, formerly `ref2video`, when the task needs all-around references across images, video, and audio; it supports the `seedance2.0` family.
+- Use `multimodal2video` for Dreamina's flagship "全能参考" mode, formerly `ref2video`, when the task needs all-around references across images, video, and audio; it supports the Seedance 2.0 family, including `seedance2.0mini`.
 
 For the exact flags and supported combinations, rely on each subcommand's `-h`.
 
@@ -77,6 +79,11 @@ Additional guidance:
 - some commands do not expose model selection at all
 - some models, especially the `seedance2.0` family, can be capacity-constrained
 - if the user cares more about speed than maximum quality, do not default to `seedance2.0` unless they explicitly ask for it
+
+
+## Current CLI alignment
+
+This plugin is aligned with the Dreamina CLI help observed on 2026-06-26, including `generate_num` for `text2image` and `image2image`, Seedance 1.x video model names for image/reference video commands, and `seedance2.0_vip` `4k` video resolution support. Still re-check live `dreamina <subcommand> -h` before spending credits because the local CLI is the source of truth.
 
 ## How to judge submit success
 

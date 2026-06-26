@@ -6,18 +6,19 @@ Dreamina Codex Plugin 是一个面向 Codex 的本地插件，用来调用本机
 
 ## 功能概览
 
-- 文生图：`text2image`
-- 图生图：`image2image`
-- 图片高清放大：`image_upscale`
-- 文生视频：`text2video`
-- 图生视频：`image2video`
-- 首尾帧 / 参考帧视频：`frames2video`
+- 文生图：`text2image`，支持 `generate_num` 批量生成 1-10 张
+- 图生图：`image2image`，支持 `generate_num` 批量生成 1-10 张
+- 图片高清放大：`image_upscale`，支持 `2k/4k/8k`，其中 `4k/8k` 需要 VIP 权益
+- 文生视频：`text2video`，`seedance2.0_vip` 支持 `4k`
+- 图生视频：`image2video`，支持 Seedance 1.x/2.x 模型名
+- 首尾帧 / 参考帧视频：`frames2video`，`seedance2.0_vip` 支持 `4k`
 - 多帧故事视频：`multiframe2video`
-- 全能参考视频：`multimodal2video`
+- 全能参考视频：`multimodal2video`，`seedance2.0_vip` 支持 `4k`
 - 异步任务结果查询：`query_result`
 - 历史任务列表：`list_task`
 - 账号积分查询：`user_credit`
 - 登录、无头登录检查、重新登录、退出登录：`login`、`checklogin`、`relogin`、`logout`
+- 创作 Session 管理：`dreamina session create/list/search/rename/delete` 及其别名
 - CLI 版本和能力发现：`version`、`list_capabilities`
 
 插件默认用中文与用户沟通；除非用户明确要求英文，说明、警告、结果总结和交互提示都会使用中文。
@@ -42,7 +43,7 @@ dreamina version
 dreamina login
 ```
 
-无头登录流程通常会返回 `device_code`，之后可用：
+默认 OAuth Device Flow 会打印 `verification_uri`、`user_code`、`device_code` 并等待授权；`--headless` 会打印授权材料后退出。无头登录流程返回 `device_code` 后可用：
 
 ```bash
 dreamina login checklogin --device_code <device_code>

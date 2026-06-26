@@ -33,32 +33,36 @@ python3 scripts/list_capabilities.py --format markdown
 
 - `text2image.py`
   - Required: `--prompt`
-  - Optional: `--ratio`, `--resolution-type`, `--model-version`, `--session`, `--poll`
+  - Optional: `--ratio`, `--resolution-type`, `--model-version`, `--generate-num`, `--session`, `--poll`
 - `image2image.py`
   - Required: `--images`
   - Input count: `1-10`
-  - Optional: `--prompt`, `--ratio`, `--resolution-type`, `--model-version`, `--session`, `--poll`
+  - Optional: `--prompt`, `--ratio`, `--resolution-type`, `--model-version`, `--generate-num`, `--session`, `--poll`
 - `image_upscale.py`
   - Required: `--image`
   - Optional: `--resolution-type`, `--session`, `--poll`
+  - Resolution choices: `2k`, `4k`, `8k`; `4k` and `8k` require VIP account entitlement.
 
 ### Video generation
 
 - `text2video.py`
   - Required: `--prompt`
   - Optional: `--duration`, `--ratio`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
+  - Default model: `seedance2.0fast`; duration range: `4-15` seconds.
+  - `seedance2.0_vip` supports `720p`, `1080p`, and `4k`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
 - `image2video.py`
   - Required: `--image`, `--prompt`
   - Optional: `--duration`, `--video-resolution`, `--model-version`, `--session`, `--poll`
   - Notes:
-    - model aliases `3.0_fast`, `3.0_pro`, `3.5_pro` are normalized to CLI canonical values
+    - legacy model aliases `3.0`, `3.0fast`, `3.0_fast`, `3.5pro`, and `3.5_pro` are normalized to the Seedance 1.x CLI names
     - advanced controls require `--model-version`
-    - only `seedance2.0_vip` currently supports `1080p`; other models, including `seedance2.0mini`, use `720p`
+    - duration ranges: Seedance 1.0 models `3-10` seconds, Seedance 1.5 Pro `4-12` seconds, Seedance 2.x models `4-15` seconds
+    - only `seedance2.0_vip` currently supports `720p`, `1080p`, and `4k`; other models, including `seedance2.0mini`, use `720p`
 - `frames2video.py`
   - Required: `--first`, `--last`, `--prompt`
   - Optional: `--duration`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - only `seedance2.0_vip` currently supports `1080p`; other models, including `seedance2.0mini`, use `720p`
+  - Default model: `seedance2.0_vip`; duration ranges: Seedance 1.5 Pro `4-12` seconds, Seedance 2.x models `4-15` seconds.
+  - only `seedance2.0_vip` currently supports `720p`, `1080p`, and `4k`; other models, including `seedance2.0mini`, use `720p`
 - `multiframe2video.py`
   - Required: `--images`
   - Input count: `2-20`
@@ -74,8 +78,9 @@ python3 scripts/list_capabilities.py --format markdown
 - `multimodal2video.py`
   - Dreamina's flagship "全能参考" mode, formerly `ref2video`
   - Required: at least one `--image` or `--video`
+  - Input limits: up to 9 images, 3 videos, and 3 audio files; audio duration should be `2-15` seconds.
   - Optional: repeated `--image`, repeated `--video`, repeated `--audio`, `--prompt`, `--duration`, `--ratio`, `--video-resolution`, `--model-version`, `--session`, `--poll`
-  - `seedance2.0_vip` supports `1080p`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
+  - `seedance2.0_vip` supports `720p`, `1080p`, and `4k`; other Seedance 2.0 variants, including `seedance2.0mini`, currently use `720p`.
 
 ### Query, list, and account
 
@@ -104,9 +109,9 @@ python3 scripts/list_capabilities.py --format markdown
 - `version.py`
   - No task-specific parameters
 
-### Raw CLI-only session management
+### Raw CLI-only creative session management
 
-Dreamina also exposes `dreamina session` directly. These commands are currently raw CLI-only, not Python wrapper scripts:
+Dreamina also exposes `dreamina session` directly for creative task grouping. These commands are currently raw CLI-only, not Python wrapper scripts. All session commands require login, and generation commands can target a creative session with `--session=<id>`:
 
 - `dreamina session create [name]`
   - Create a session. Omit `name` to let the backend auto-name it.
@@ -121,20 +126,20 @@ Dreamina also exposes `dreamina session` directly. These commands are currently 
   - Rename a session. Session `0` cannot be renamed.
   - Alias: `dreamina session update <session_id> <new_name>`.
 - `dreamina session delete <session_id>`
-  - Delete a session. Session `0` cannot be deleted; history is moved back to the default session.
+  - Delete a session. Session `0` cannot be deleted; history is safely moved back to the default session.
   - Alias: `dreamina session rm <session_id>`.
 
 
-## 3.1 Current model choices from `dreamina -h` on 2026-06-22
+## 3.1 Current model choices from `dreamina -h` on 2026-06-26
 
-- `text2image.py`: `3.0`, `3.1`, `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`
-- `image2image.py`: `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`
-- `text2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
-- `image2video.py`: `3.0`, `3.0fast`, `3.0pro`, `3.0_fast`, `3.0_pro`, `3.5pro`, `3.5_pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
-- `frames2video.py`: `3.0`, `3.5pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
-- `multimodal2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`
+- `text2image.py`: `3.0`, `3.1`, `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`; `--generate-num` supports `1-10`.
+- `image2image.py`: `4.0`, `4.1`, `4.5`, `4.6`, `4.7`, `5.0`; `--generate-num` supports `1-10`.
+- `text2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`.
+- `image2video.py`: `seedance1.0fast`, `seedance1.0`, `seedance1.5pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`. Legacy aliases `3.0`, `3.0fast`, `3.0_fast`, `3.5pro`, and `3.5_pro` are accepted by the wrapper for compatibility.
+- `frames2video.py`: `seedance1.5pro`, `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`. Legacy aliases `3.5pro` and `3.5_pro` are accepted by the wrapper for compatibility.
+- `multimodal2video.py`: `seedance2.0`, `seedance2.0fast`, `seedance2.0_vip`, `seedance2.0fast_vip`, `seedance2.0mini`.
 
-`seedance2.0_vip` supports `720p` and `1080p`. Other Seedance 2.0 family models, including `seedance2.0mini`, currently support `720p` only.
+`seedance2.0_vip` supports `720p`, `1080p`, and `4k`. Other Seedance 2.0 family models, including `seedance2.0mini`, currently support `720p` only.
 
 ## 4. Argument naming
 
@@ -145,6 +150,7 @@ Examples:
 - `--resolution-type` becomes `--resolution_type`
 - `--video-resolution` becomes `--video_resolution`
 - `--submit-id` becomes `--submit_id`
+- `--generate-num` becomes `--generate_num`
 
 The underscore forms are also accepted when needed.
 
